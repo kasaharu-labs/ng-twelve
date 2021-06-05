@@ -5,9 +5,10 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersPageComponent } from './pages/users/users.component';
 import { UsersComponent } from './containers/users/users.component';
 import { UserListComponent } from './views/user-list/user-list.component';
+import { UserListEditorComponent } from './views/user-list-editor/user-list-editor.component';
 
 @NgModule({
-  declarations: [UsersPageComponent, UsersComponent, UserListComponent],
+  declarations: [UsersPageComponent, UsersComponent, UserListComponent, UserListEditorComponent],
   imports: [CommonModule, UsersRoutingModule],
 })
 export class UsersModule {}
