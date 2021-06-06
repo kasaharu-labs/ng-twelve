@@ -1,4 +1,12 @@
 <h2>ユーザー一覧</h2>
 <p>ユーザーの一覧です</p>
 
-<app-user-list [users]="users$ | async"></app-user-list>
+<button (click)="toggleMode()">{{ toggleButtonText }}</button>
+
+<ng-container *ngIf="!editable; else editorBlock">
+  <app-user-list [users]="users$ | async"></app-user-list>
+</ng-container>
+
+<ng-template #editorBlock>
+  <app-user-list-editor></app-user-list-editor>
+</ng-template>

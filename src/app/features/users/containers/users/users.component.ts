@@ -11,6 +11,8 @@ import { UsersApi } from '../../../../infrastructures/api/users.api';
 export class UsersComponent implements OnInit {
   constructor(private readonly _usersApi: UsersApi) {}
   users$: Observable<User[]> | null = null;
+  editable = false;
+  toggleButtonText = '編集モードへ';
 
   ngOnInit(): void {
     this.fetchUsers();
@@ -18,5 +20,10 @@ export class UsersComponent implements OnInit {
 
   fetchUsers(): void {
     this.users$ = this._usersApi.getUsers();
+  }
+
+  toggleMode(): void {
+    this.editable = !this.editable;
+    this.toggleButtonText = this.editable ? '編集モードを終了' : '編集モードへ';
   }
 }
