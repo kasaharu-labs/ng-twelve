@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../../../../domain/user';
 
 @Component({
   selector: 'app-user-list-editor',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListEditorComponent implements OnInit {
   constructor() {}
+  @Input()
+  users: User[] | null = null;
 
   ngOnInit(): void {}
 }

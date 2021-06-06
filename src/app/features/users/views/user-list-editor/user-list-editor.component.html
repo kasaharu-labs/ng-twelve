@@ -1,1 +1,18 @@
-<p>user-list-editor works!</p>
+<ng-container *ngIf="users">
+  <table>
+    <thead>
+      <div>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Website</th>
+      </div>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users">
+        <app-user-editor [user]="user"></app-user-editor>
+      </ng-container>
+    </tbody>
+  </table>
+</ng-container>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { User } from '../../../../domain/user';
 
 @Component({
   selector: 'app-user-editor',
@@ -7,6 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserEditorComponent implements OnInit {
   constructor() {}
+  @Input()
+  user!: User;
 
-  ngOnInit(): void {}
+  form = new FormGroup({
+    name: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    website: new FormControl(''),
+  });
+
+  ngOnInit(): void {
+    this.form.setValue({
+      name: this.user.name,
+      username: this.user.username,
+      email: this.user.email,
+      phone: this.user.phone,
+      website: this.user.website,
+    });
+  }
 }
