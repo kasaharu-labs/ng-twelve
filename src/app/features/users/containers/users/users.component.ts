@@ -10,7 +10,7 @@ import { UsersApi } from '../../../../infrastructures/api/users.api';
 })
 export class UsersComponent implements OnInit {
   constructor(private readonly _usersApi: UsersApi) {}
-  users$: Observable<User[]> | null = null;
+  users$: Observable<User[] | null> = this._usersApi._users$;
   editable = false;
   toggleButtonText = '編集モードへ';
 
@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    this.users$ = this._usersApi.getUsers();
+    this._usersApi.getUsers();
   }
 
   toggleMode(): void {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../domain/user';
 
 @Injectable({
@@ -8,12 +8,25 @@ import { User } from '../../domain/user';
 })
 export class UsersApi {
   constructor(private readonly _http: HttpClient) {}
+  _users$ = new BehaviorSubject<User[] | null>(null);
 
-  getUsers(): Observable<User[]> {
-    return this._http.get<User[]>('https://jsonplaceholder.typicode.com/users');
+  get users$(): Observable<User[] | null> {
+    return this._users$.asObservable();
   }
 
-  patchUser(userId: number, body: Partial<User>) {
-    return this._http.patch(`https://jsonplaceholder.typicode.com/users/${userId}`, body);
+  getUsers(): void {
+    this._http.get<User[]>('https://jsonplaceholder.typicode.com/users').subscribe((val) => this._users$.next(val));
+  }
+
+  patchUser(userId: number, body: Partial<User>): void {
+    this._http.patch<User>(`https://jsonplaceholder.typicode.com/users/${userId}`, body).subscribe((val) => {
+      const currentUsers = this._users$.getValue();
+      if (currentUsers === null) {
+        this._users$.next([val]);
+        return;
+      }
+
+      this._users$.next([...currentUsers, val]);
+    });
   }
 }
