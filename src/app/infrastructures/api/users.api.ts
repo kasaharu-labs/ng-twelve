@@ -26,7 +26,8 @@ export class UsersApi {
         return;
       }
 
-      this._users$.next([...currentUsers, val]);
+      const copiedUsers = [...currentUsers].map((user) => (user.id === userId ? val : user));
+      this._users$.next(copiedUsers);
     });
   }
 }
