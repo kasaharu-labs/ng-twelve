@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../../../domain/user';
 
 @Component({
@@ -11,5 +11,12 @@ export class UserListEditorComponent implements OnInit {
   @Input()
   users: User[] | null = null;
 
+  @Output()
+  userUpdated = new EventEmitter<User>();
+
   ngOnInit(): void {}
+
+  submit(user: User): void {
+    this.userUpdated.emit(user);
+  }
 }

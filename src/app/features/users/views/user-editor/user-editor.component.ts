@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../../../../domain/user';
 
@@ -11,6 +11,9 @@ export class UserEditorComponent implements OnInit {
   constructor() {}
   @Input()
   user!: User;
+
+  @Output()
+  submit = new EventEmitter<User>();
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -28,5 +31,7 @@ export class UserEditorComponent implements OnInit {
       phone: this.user.phone,
       website: this.user.website,
     });
+
+    this.form.valueChanges.subscribe((val) => this.submit.emit(val));
   }
 }

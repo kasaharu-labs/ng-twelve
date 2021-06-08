@@ -22,6 +22,10 @@ export class UsersComponent implements OnInit {
     this._usersApi.getUsers();
   }
 
+  updateUser(user: User) {
+    this._usersApi.patchUser(user.id, user);
+  }
+
   toggleMode(): void {
     this.editable = !this.editable;
     this.toggleButtonText = this.editable ? '編集モードを終了' : '編集モードへ';

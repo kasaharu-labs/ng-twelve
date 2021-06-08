@@ -8,5 +8,5 @@
 </ng-container>
 
 <ng-template #editorBlock>
-  <app-user-list-editor [users]="users$ | async"></app-user-list-editor>
+  <app-user-list-editor [users]="users$ | async" (userUpdated)="updateUser($event)"></app-user-list-editor>
 </ng-template>

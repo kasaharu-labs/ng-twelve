@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let user of users">
-        <app-user-editor [user]="user"></app-user-editor>
+        <app-user-editor [user]="user" (submit)="submit($event)"></app-user-editor>
       </ng-container>
     </tbody>
   </table>
