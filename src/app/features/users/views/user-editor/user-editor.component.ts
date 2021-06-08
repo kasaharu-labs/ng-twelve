@@ -16,6 +16,7 @@ export class UserEditorComponent implements OnInit {
   submit = new EventEmitter<User>();
 
   form = new FormGroup({
+    id: new FormControl(),
     name: new FormControl(''),
     username: new FormControl(''),
     email: new FormControl(''),
@@ -25,6 +26,7 @@ export class UserEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.setValue({
+      id: this.user.id,
       name: this.user.name,
       username: this.user.username,
       email: this.user.email,
